@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            body {
+                margin: 0;
+                background-image: url('images/day.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;  
+                background-size: cover;
+            }
+            /* body dark mode */
+            .dark-mode {
+                background-image: url('images/night.jpg');
+                background-repeat: no-repeat;
+                background-attachment: fixed;  
+                background-size: cover;
+            }
+
+            /* canvas css */
+            canvas {
+                padding: 0;
+                margin-top: 50px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                width: 60%;
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            /* div css */
+            div {
+                background-color: rgba(0, 0, 0, 0.5);
+                width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #main {
+                text-align: center;
+                padding-top: 2%;
+                padding-bottom: 2%;
+            }
+
+            /* aside css */
+            aside {
+                width: 20%;
+                padding-left: 10%;
+                padding-top: 1%;
+                color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                position: absolute;
+                text-align: left;
+            }
+
+            /* radio button css */
+            .container {
+                display: block;
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                font-size: 22px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #eee;
+                border-radius: 50%;
+            }
+            .container:hover input ~ .checkmark {
+                background-color: #ccc;
+            }
+            .container input:checked ~ .checkmark {
+                background-color: rgb(27, 37, 179);
+            }
+            .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+            .container input:checked ~ .checkmark:after {
+                display: block;
+            }
+            .container .checkmark:after {
+                top: 9px;
+                left: 9px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: white;
+            }
+
+            /* directional buttons css */
+            button {
+                margin-right: 50px;
+                margin-left: 50px;
+                font-size: 38px;
+                position: relative;
+                text-align: center;
+                cursor: pointer;
+                outline: none;
+                color: #fff;
+                background: rgb(6,14,131);
+                background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
+                border: none;
+                border-radius: 50%;
+                box-shadow: 0 9px #999;
+                transition: all 0.1s ease;
+            }
+            button:hover {
+                background: rgb(0,3,255);
+                background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
+            }
+            button:active {
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+
+            /* toggle button css */
+            input {
+                -webkit-appearance: none;
+                margin-top: 40px;
+                margin-left: 15%;
+                position: absolute;
+                width: 200px;
+                height: 100px;
+                background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
+                background-size: cover;
+                border-radius: 50px;
+                outline: none;
+                transition: background-image .90s;
+                box-shadow: 0 9px #999;
+            }
+            input:before {
+                content: "";
+                float: right;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100px;
+                width: 100px;
+                background-color: navy;
+                border-radius: 50px;
+                transition: all .9s;
+                background-color: #F7CA33;
+            }
+            input:checked {
+                background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
+                transition: background-image .90s;
+
+            }
+            input:checked:before {
+                transform: translate(100%);
+                transition: all .9s;
+                background-color: #ECF0F3;
+            }
+
+            /* progress bar css */
+            #myBar {
+                float: left;
+                width: 1%;
+                height: 10px;
+                background-color: #ffffff;
+            }
+        </style>
+    </head>
+
+    <!-- on page load body calls starGame function-->
+    <body onload="startGame()">
+        <script>
+        // game variables
+        var myGamePiece;
+        var myObstacles = [];
+        var myScore;
+        var mySound;
+        var clickSound;
+        var winner;
+
+        // intilise game elements
+        function startGame() {
+            myGamePiece = new component(30, 30, "white", 10, 120);
+            myScore = new component("30px", "Consolas", "white", 40, 40, "text");
+            mySound = new sound("hit.wav");
+            clickSound = new sound("button.ogg")
+            winner = new component("72px", "Verdana", "white", 300, 200, "text");
+            myGameArea.start();
+            move();
+        }
+
+        // changes color of game based on radio button selection
+        function getColor() {
+            var myColor;           
+            if (document.getElementById('blue').checked) {
+                myColor = '#00FFFF';
+            }
+            else if (document.getElementById('pink').checked) {
+                myColor = '#FF1493';
+            }
+            else if (document.getElementById('green').checked) {
+                myColor = '#7FFF00';
+            }
+            else if (document.getElementById('red').checked) {
+                myColor = '#FF0000';
+            }
+
+            return myColor;
+        }
+        
+        var myGameArea = {
+            canvas : document.createElement("canvas"),
+
+            // setup canvas / game
+            start : function() {
+                this.canvas.width = 1000;
+                this.canvas.height = 400;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                this.frameNo = 0;
+                this.interval = setInterval(updateGameArea, 20);
+            },
+
+            // clear frames to prevent "trailing"            
+            clear : function() {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            },
+
+            // gameOver
+            stop : function() {
+                stop.called = true;
+                clearInterval(this.interval);
+            }
+        }
+
+        // player object setup
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            this.width = width;
+            this.height = height;
+            this.speedX = 0;
+            this.speedY = 0;    
+            this.x = x;
+            this.y = y;    
+            this.update = function() {
+                ctx = myGameArea.context;
+                if (this.type == "text") {
+                    ctx.font = this.width + " " + this.height;
+                    ctx.fillStyle = color;
+                    ctx.fillText(this.text, this.x, this.y);
+                } else {
+                    ctx.fillStyle = getColor();
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
+
+            // movement
+            this.newPos = function() {
+                this.x += this.speedX;
+                this.y += this.speedY;        
+            }
+
+            // collision detection
+            this.crashWith = function(otherobj) {
+                var myleft = this.x;
+                var myright = this.x + (this.width);
+                var mytop = this.y;
+                var mybottom = this.y + (this.height);
+                var otherleft = otherobj.x;
+                var otherright = otherobj.x + (otherobj.width);
+                var othertop = otherobj.y;
+                var otherbottom = otherobj.y + (otherobj.height);
+                var crash = true;
+                if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                    crash = false;
+                }
+                return crash;
+            }
+        }
+        
+        // update function
+        function updateGameArea() {
+            var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+
+            // collision detection - play sound on hit & end game
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myGamePiece.crashWith(myObstacles[i])) {
+                    mySound.play();
+                    myGameArea.stop();
+                    return;
+                } 
+            }
+
+            // randomised game obstacles
+            myGameArea.clear();
+            myGameArea.frameNo += 1;
+            if (myGameArea.frameNo == 1 || everyinterval(150)) {
+                x = myGameArea.canvas.width;
+                minHeight = 20;
+                maxHeight = 200;
+                height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+                minGap = 50;
+                maxGap = 200;
+                gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+                myObstacles.push(new component(10, height, "red", x, 0));
+                myObstacles.push(new component(10, x - height - gap, "red", x, height + gap));
+            }
+            for (i = 0; i < myObstacles.length; i += 1) {
+                myObstacles[i].speedX = -1;
+                myObstacles[i].newPos();
+                myObstacles[i].update();
+            }
+
+            // updates score per frame
+            myScore.text="SCORE: " + myGameArea.frameNo;
+            myScore.update();
+
+            // updates player character
+            myGamePiece.newPos();    
+            myGamePiece.update();
+        }
+        
+        // sound functions
+        function sound(src) {
+            this.sound = document.createElement("audio");
+            this.sound.src = src;
+            this.sound.setAttribute("preload", "auto");
+            this.sound.setAttribute("controls", "none");
+            this.sound.style.display = "none";
+            document.body.appendChild(this.sound);
+            this.play = function(){
+            this.sound.play();
+            }
+            this.stop = function(){
+            this.sound.pause();
+            }    
+        }   
+
+        function everyinterval(n) {
+            if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+            return false;
+        }
+        
+        // movement functions
+        function moveup() {
+            myGamePiece.speedY = -1; 
+        }
+        function movedown() {
+            myGamePiece.speedY = 1; 
+        }
+        function moveleft() {
+            myGamePiece.speedX = -2; 
+        }
+        function moveright() {
+            myGamePiece.speedX = 1; 
+        }
+        function clearmove() {
+            myGamePiece.speedX = 0; 
+            myGamePiece.speedY = 0; 
+        }
+
+        // dark mode
+        function darkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+
+        // progress bar
+        var i = 0;
+        function move() {
+            if (i == 0) {
+                i = 1;
+                var elem = document.getElementById("myBar");
+                var width = 1;
+                var id = setInterval(frame, 10);
+                function frame() {
+                    if (stop.called) {
+                        // do nothing - stop progress bar
+                    } else {
+                        if (width >= 100) {
+                            clearInterval(id);
+                            i = 0;
+                            myGameArea.stop();
+                            winner.text="YOU WIN!!";
+                            winner.update();
+                        } else {
+                            width = width + 0.01;
+                            elem.style.width = width + "%";
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+
+        <!-- Div container for progress bar-->
+        <div id="myProgress">
+            <div id="myBar"></div>
+        </div>
+
+        <!-- Div container for buttons outside of canvas -->
+        <div id="main">
+            <!-- Aside for the radio color selection -->
+            <aside id="radioColor" onclick="getColor()"> 
+                <label class="container">Blue
+                    <input type="radio" id="blue" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Pink
+                    <input type="radio" id="pink" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Green
+                    <input type="radio" id="green" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Red
+                    <input type="radio" id="red" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+            </aside>
+
+            <!-- Toggle button for night mode -->
+            <input type="checkbox" id="myCheck" onclick="darkMode()">
+            
+            <!-- Buttons & related functions - unicode used for directions -->
+            <button onmousedown="moveup(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveup()">🠉</button><br><br>
+            <button onmousedown="moveleft(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveleft()">🠈</button>
+            <button onmousedown="moveright(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveright()">🠊</button><br><br>
+            <button onmousedown="movedown(), clickSound.play()" onmouseup="clearmove()" ontouchstart="movedown()">🠋</button>
+        </div>
+    </body>
+</html>      
