@@ -111,7 +111,7 @@
                 background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
                 border: none;
                 border-radius: 50%;
-                box-shadow: 0 9px #999;
+                box-shadow: 0 0.4vw #999;
                 transition: all 0.1s ease;
             }
             button:hover {
@@ -136,7 +136,7 @@
                 border-radius: 5vw;
                 outline: none;
                 transition: background-image .90s;
-                box-shadow: 0 9px #999;
+                box-shadow: 0 0.4vw #999;
             }
             input:before {
                 content: "";
@@ -429,10 +429,10 @@
             <input type="checkbox" id="myCheck" onclick="darkMode()">
             
             <!-- Buttons & related functions - unicode used for directions -->
-            <button onmousedown="moveup(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveup()">🠉</button><br><br>
-            <button onmousedown="moveleft(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveleft()">🠈</button>
-            <button onmousedown="moveright(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveright()">🠊</button><br><br>
-            <button onmousedown="movedown(), clickSound.play()" onmouseup="clearmove()" ontouchstart="movedown()">🠋</button>
+            <button onmousedown="moveup(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveup()" ontouchend="clearmove()">🠉</button><br><br>
+            <button onmousedown="moveleft(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveleft()" ontouchend="clearmove()">🠈</button>
+            <button onmousedown="moveright(), clickSound.play()" onmouseup="clearmove()" ontouchstart="moveright()" ontouchend="clearmove()">🠊</button><br><br>
+            <button onmousedown="movedown(), clickSound.play()" onmouseup="clearmove()" ontouchstart="movedown()" ontouchend="clearmove()">🠋</button>
         </div>
     </body>
 </html>      
