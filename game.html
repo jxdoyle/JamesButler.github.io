@@ -179,6 +179,7 @@
         var myGamePiece;
         var myObstacles = [];
         var myScore;
+        var myName;
         var mySound;
         var clickSound;
         var winner;
@@ -186,7 +187,8 @@
         // intilise game elements
         function startGame() {
             myGamePiece = new component(30, 30, "white", 10, 120);
-            myScore = new component("30px", "Consolas", "white", 40, 40, "text");
+            myScore = new component("30px", "Consolas", "white", 20, 40, "text");
+            myName = new component("30px", "Consolas", "white", 220, 40, "text");
             mySound = new sound("hit.wav");
             clickSound = new sound("button.ogg")
             winner = new component("72px", "Verdana", "white", 300, 200, "text");
@@ -323,6 +325,10 @@
             // updates player character
             myGamePiece.newPos();    
             myGamePiece.update();
+
+            // gets and displays player username
+            myName.text="NAME: " + getParameterByName(window.location.search.substring(1), 'username');
+            myName.update();
         }
         
         // sound functions
@@ -395,6 +401,12 @@
                     }
                 }
             }
+        }
+
+        // function to get params from url
+        getParameterByName = function(url, name) {
+            let searchParams = new URLSearchParams(url.split('?')[1]);
+            return searchParams.get(name)
         }
         </script>
 
