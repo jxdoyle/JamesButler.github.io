@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
     <!-- title -->
     <title>James Doyle</title>
 
     <!-- meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A simple, elegant portfolio page showcasing the work of Institute of Technology Carlow student, UX/UI designer and developer, James Doyle">
+    <meta name="description" content="A simple portfolio page showcasing the work of Institute of Technology Carlow student, UX/UI designer and developer, James Doyle">
     <meta name="keywords" content="portfolio, css, js, html, javascript, ux, ui, c++, games, apps, web design, web development, pwa, wireframe, prototype">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
@@ -19,182 +19,128 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    
+
     <!-- css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- fontawesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
 
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-
-</head>
-
-<body>
-    <!-- header -->
-    <header class="header" id="top">
-
-        <!-- nav bar -->
-        <div class="row">  
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="resources/JamesDoyle_Resume.pdf" target="_blank" class="nav-link">Resume</a></li>
-                </ul>
-            </nav>
+  </head>
+  <body>
+    <!-- navbar Section -->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="#home" id="navbar__logo">jxdoyle</a>
+        <div class="navbar__toggle" id="mobile-menu">
+          <span class="bar"></span> <span class="bar"></span>
+          <span class="bar"></span>
         </div>
-        <!-- end of nav bar -->
+        <ul class="navbar__menu">
+          <li class="navbar__item">
+            <a href="#home" class="navbar__links" id="home-page">Home</a>
+          </li>
+          <li class="navbar__item">
+            <a href="#work" class="navbar__links" id="services-page">Work</a>
+          </li>
+          <li class="navbar__item">
+            <a href="#about" class="navbar__links" id="about-page">About</a>
+          </li>
+          <li class="navbar__btn">
+            <a href="resources/JamesDoyle_Resume.pdf" target="_blank" class="button" id="resume">Resume</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-        <span class="warning">wip website not yet responsive for best viewing experience use a desktop/laptop</span>
+    <!-- hero Section -->
+    <div class="hero" id="home">
+      <div class="hero__container">
+        <h1 class="hero__heading">Hi I'm <span>James</span></h1>
+        <p class="hero__description">I'm an aspiring UX/UI designer and developer based in Ireland <br>who aims to build beautifully crafted and enriching user experiences
+        </p>
+        <button class="main__btn"><a href="mailto:jxdoyle@gmail.com" target="_blank">Get in Touch</a></button>
+      </div>
+    </div>
 
-        <!-- header text box -->
-        <div class="row">
-            <div class="header-text-box">
-                <h1 class="header-main-text">
-                    <span>Hi, I'm James</span>
-                </h1>
-
-                <!-- short bio -->
-                <p>I'm an aspiring UX/UI designer and developer based in Ireland who aims to build beautifully crafted and enriching user experiences 😊</p>
-                <!-- end of short bio -->
-
-                <!-- header illustration -->
-                <div class="row">
-                    <img class="illustration" src="images/illustration.svg" alt="header illustration" />
-                </div>
-                <!-- end of header illustration -->
-                
-                <!-- social links -->
-                <div class="row">
-                    <ul class="social-link-list">
-                        <!-- mail link -->
-                        <li class="social-link-item">
-                            <a href="mailto:jxdoyle@gmail.com" target="_blank" title="Link to email address">
-                                <img src="/images/gmail.svg" class="social-link-image" alt="email">
-                            </a>
-                        </li>
-                        <!-- github link -->
-                        <li class="social-link-item">
-                            <a href="https://github.com/jxdoyle/" target="_blank" title="Link to github profile">
-                                <img src="/images/github.svg" class="social-link-image" alt="Github">
-                            </a>
-                        </li>
-                        <!-- twitter link -->
-                        <li class="social-link-item">
-                            <a href="https://twitter.com/jxdoyle/" target="_blank" title="Link to twitter profile">
-                                <img src="/images/twitter.svg" class="social-link-image" alt="twitter">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end of social links -->
-
-            </div>
+    <!-- services Section -->
+    <div class="services" id="work">
+      <h1>My Work</h1>
+      <div class="services__wrapper">
+        <div class="services__card">
+          <h2>Websites</h2>
+          <p>Design and Development</p>
+          <div class="services__btn"><button>View Sites</button></div>
         </div>
-        <!-- end of header text box -->
-    </header>
-    <!-- end of header -->
-
-    <!-- my work -->
-    <section class="work" id="work">
-        <div class="row">
-            <h2>My Work</h2>
-            <div class="work-box-container">
-
-                <!-- project 1-->
-                <div class="work-box">
-                    <div class="work-text">
-                        <h3>Tic Tac Toe</h3>
-                        <p>
-                            A simple minimalistic two player Tic Tac Toe game
-                        </p>
-                        <ul class="work-list">
-                            <li>HTML</li>
-                            <li>CSS</li>
-                            <li>JavaScript</li>
-                        </ul>
-                        <div class="work-links">
-
-                            <!-- play game button -->
-                            <a href="https://jxdoyle.github.io/tictactoe-game" target="_blank" class="link-text">
-                                Play Game
-                            </a>
-
-                            <!-- github source link -->
-                            <a href="https://github.com/jxdoyle/tictactoe-game" title="view source code" target="_blank">
-                                <img src="./images/github.svg" class="work-code" alt="github">
-                            </a>
-
-                        </div>
-                    </div>
-                    <div class="work-image-box">
-                        <img src="./images/project-1.gif" class="work-image" alt="tic tac toe image" />
-                    </div>
-                </div>
-                <!-- end of project 1 -->
-
-            </div>
+        <div class="services__card">
+          <h2>Games</h2>
+          <p>Sit Back and Relax</p>
+          <div class="services__btn"><button>View Library</button></div>
         </div>
-    </section>
-    <!-- end of my work -->
-    
-    <!-- about-me me -->
-    <section class="about" id="about">
-        <div class="row">
-            <h2>About Me</h2>
-            <div class="about-me-container">
-                <div class="about-me-text">
-                    <!-- long bio -->
-                    <p>
-                        I'm currently attending my 3rd year in the Institute of Technology Carlow studying Interactive Digital Art and Design. Constantly learning new skills covering a wide range of areas such as UX/UI design, web development, database management, 2D/3D art, animation, and much more.</br></br>Away from the desk I love movies, tv shows and sports, whether you want to build something together or go for a round of golf feel free to say hi 👋
-                    </p>
-                    <!-- end of long bio-->
-                </div>
-                <div class="photo-container">
-                    <!-- photo of me -->
-                    <img class="about-me-photo" src="images/picture-of-me.jpg" alt="picture of James Doyle" />
-                    <!-- end of photo -->
-                </div>
-            </div>
+        <div class="services__card">
+          <h2>Art Work</h2>
+          <p>A Personal Showcase</p>
+          <div class="services__btn"><button>View Gallery</button></div>
         </div>
-    </section>
-    <!-- end of about-me me -->
-    
-    <!-- footer -->
-    <footer class="footer">
-        <div class="row">
-            <!-- social media links -->
-            <ul class="social-link-list">
-                <!-- mail link -->
-                <li class="social-link-item">
-                    <a href="mailto:jxdoyle@gmail.com" target="_blank" title="Link to email address">
-                        <img src="/images/gmail.svg" class="social-link-image" alt="email">
-                    </a>
-                </li>
-                <!-- github link -->
-                <li class="social-link-item">
-                    <a href="https://github.com/jxdoyle/" target="_blank" title="Link to github profile">
-                        <img src="/images/github.svg" class="social-link-image" alt="Github">
-                    </a>
-                </li>
-                <!-- twitter link -->
-                <li class="social-link-item">
-                    <a href="https://twitter.com/jxdoyle/" target="_blank" title="Link to twitter profile">
-                        <img src="/images/twitter.svg" class="social-link-image" alt="twitter">
-                    </a>
-                </li>
-            </ul>
-            <!-- end of social media links -->
-    
-            <!-- copyright -->
-            <p>
-                &copy; 2021 - Designed & Developed by <a href="https://github.com/jxdoyle/jxdoyle.github.io" class="link">James</a>.
-            </p>
-            <!-- end of copyright -->
+        <div class="services__card">
+          <h2>Course Work</h2>
+          <p>Creative Solutions</p>
+          <div class="services__btn"><button>View Work</button></div>
         </div>
-    </footer>
-    <!-- end of footer -->
-</body>    
+      </div>
+    </div>
+
+    <!-- about Section -->
+    <div class="main" id="about">
+      <div class="main__container">
+        <div class="main__img--container">
+          <div class="main__img--card"></div>
+        </div>
+        <div class="main__content">
+          <h1>Who am I?</h1>
+          <p class="main__description">Currently attending IT Carlow pursuing a BSc in Interactive Digital Art and Design. Learning new skills covering a wide range of areas such as UX/UI design, web development, database management, 2D/3D art, animation, and much more.<br><br>Away from the desk I love watching movies and shows, playing video games, I also enjoy sports. I love to travel, meet new people and explore new cultures.</p>
+          <button class="main__btn"><a href="resources/JamesDoyle_Resume.pdf" target="_blank">Resume</a></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer Section -->
+    <div class="footer__container">
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="/" id="footer__logo">jxdoyle</a>
+          </div>
+          <p class="website__rights">Designed & Developed by James</a></p>
+          <div class="social__icons">
+            <a href="https://github.com/jxdoyle" class="social__icon--link" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/james-doyle-716b71221/" class="social__icon--link" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/jxdoyle" class="social__icon--link" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/jxdoyle_" class="social__icon--link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- script for navbar highlighting and mobile menu -->
+    <script src="app.js"></script>
+  </body>
 </html>
